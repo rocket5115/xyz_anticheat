@@ -1,7 +1,5 @@
 XYZ = nil
 
-TriggerEvent('XYZSource:getSharedObject', function(obj) XYZ = obj end)
-
 local BypassType = AC.ServerConfig.BypassType
 local BypassRanks = AC.ServerConfig.BypassRanks
 
@@ -320,6 +318,7 @@ end
 local identifiersFormat = "**Name:** %s\n**ServerID:** %s\n**Reason:** %s\n **BanID:** %s\n**Steam:** %s\n**Discord:** %s\n**License:** %s\n**License2:** %s\n**XBL:** %s\n**Live:** %s\n**IP:** ||%s||\n"
 
 function AC:BanPlayer(source, reason)
+    print(reason)
     local _source = source
     local identifiers = Core:RetrieveIdentifiers(_source)
 
