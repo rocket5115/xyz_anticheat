@@ -134,6 +134,47 @@ Citizen.CreateThread(function()
                                 TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player has more health than 200! ' .. GetEntityHealth(playerPed) .. '/' .. GetEntityMaxHealth(playerPed))
                             end
                         end
+                        if ACConfig.AntiInvisible and timeOut and playerSpawned then
+                            if IsPedWalking(playerPed) and not IsPedStill(playerPed) then
+                                SetEntityVisible(playerPed, true)
+                                if not IsEntityVisible(playerPed) then
+                                    TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player Is Invisible!')
+                                end
+                            elseif IsPedRunning(playerPed) and not IsPedStill(playerPed) then
+                                SetEntityVisible(playerPed, true)
+                                if not IsEntityVisible(playerPed) then
+                                    TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player Is Invisible!')
+                                end
+                            elseif GetEntityModel(PlayerPedId()) == GetHashKey('mp_m_niko_01') then
+                                TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player Is Invisible!')
+                            end
+                        end
+                        if ACConfig.AntiRagdoll and timeOut and not IsPedInAnyVehicle(playerPed, true) and playerSpawned then
+                            if IsPedWalking(playerPed) and not IsPedStill(playerPed) then
+                                SetPedCanRagdoll(playerPed, true)
+                                if CanPedRagdoll(playerPed) ~= false then
+                                    TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player Has no Ragdoll!')
+                                end
+                            elseif IsPedRunning(playerPed) and not IsPedStill(playerPed) then
+                                SetPedCanRagdoll(playerPed, true)
+                                if CanPedRagdoll(playerPed) ~= false then
+                                    TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player Is Invisible!')
+                                end
+                            end
+                        end
+                        if ACConfig.AntiInvincible and timeOut and playerSpawned then
+                            if IsPedWalking(playerPed) and not IsPedStill(playerPed) then
+                                SetPlayerInvincible(PlayerId(), true)
+                                if GetPlayerInvincible(PlayerId()) ~= false then
+                                    TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player Is Invicible!')
+                                end
+                            elseif IsPedRunning(playerPed) and not IsPedStill(playerPed) then
+                                SetPlayerInvincible(PlayerId(), true)
+                                if GetPlayerInvincible(PlayerId()) ~= false then
+                                    TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player Is Invicible!')
+                                end
+                            end
+                        end
                     end
                 end)
             end
@@ -191,7 +232,7 @@ Citizen.CreateThread(function()
                             end
                             if ACConfig.AntiTriggerBot then
                                 if IsPedShooting(playerPed) then
-                                    if GetTimeSinceLastInput(24) > 100 then
+                                    if GetTimeSinceLastInput(106) > 100 then
                                         TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player Has TriggerBot!')
                                     end
                                 end
@@ -298,6 +339,7 @@ Citizen.CreateThread(function()
                 end
 
                 Citizen.CreateThread(function()
+                    local CR = {}
                     while true do
                         Citizen.Wait(4000)
 
@@ -311,11 +353,19 @@ Citizen.CreateThread(function()
                                     ClearPedTasksImmediately(ped)
                                     local owner = NetworkGetEntityOwner(ped)
                                     if owner ~= -1 then
-                                        TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player Spawned Blacklisted Ped! ' .. GetEntityModel(ped), GetPlayerServerId(owner))
-                                    end
-                                    while not NetworkHasControlOfEntity(ped) do
-                                        NetworkRequestControlOfEntity(ped)
-                                        Citizen.Wait(10)
+                                        if not CR[GetPlayerServerId(owner)] then
+                                            CR[GetPlayerServerId(owner)] = 1
+                                        else
+                                            if CR[GetPlayerServerId(owner)] >= 6 then
+                                                TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player Spawned Blacklisted Ped! ' .. GetEntityModel(ped), GetPlayerServerId(owner))
+                                            else
+                                                CR[GetPlayerServerId(owner)] = CR[GetPlayerServerId(owner)] + 1
+                                            end
+                                        end
+                                        while not NetworkHasControlOfEntity(ped) do
+                                            NetworkRequestControlOfEntity(ped)
+                                            Citizen.Wait(10)
+                                        end
                                     end
                                     SetEntityAsMissionEntity(ped, true, true)
                                     DeleteEntity(ped)
