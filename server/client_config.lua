@@ -69,7 +69,7 @@ AC.ClientConfig.AntiInfiniteAmmo = true -- Anti infinite ammo
 
 AC.ClientConfig.BasicPlayerDetection = true -- Enables almost everything below
 
-AC.ClientConfig.AntiInvincible = true
+--AC.ClientConfig.AntiInvincible = true -- Unused by anticheat, found problems that need to be fixed
 --AC.ClientConfig.AntiInvisible = true -- Unused by anticheat, found problems that need to be fixed
 --AC.ClientConfig.AntiNoclip = true -- Unused by anticheat, found problems that need to be fixed
 AC.ClientConfig.AntiSpectator = true
