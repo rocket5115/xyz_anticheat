@@ -343,10 +343,6 @@ Citizen.CreateThread(function()
     end
 end)
 
-RegisterCommand('12', function(source, args)
-    TriggerServerEvent('esx_mecanojob:onNPCJobCompleted')
-end)
-
 local function DeleteNetworkedEntity(entity)
     local attempt = 0
     while not NetworkHasControlOfEntity(entity) and attempt < 50 and DoesEntityExist(entity) do
