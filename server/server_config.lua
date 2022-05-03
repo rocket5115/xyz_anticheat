@@ -4,7 +4,7 @@ AC.ServerConfig.BypassType = 'global' -- global, in future there will be more ty
 AC.ServerConfig.BypassRanks = {'acadmin'}
 
 AC.ServerConfig.EnableWebhook = true
-AC.ServerConfig.Webhook = "https://ptb.discord.com/api/webhooks/965043233212235776/fWiES1Lj0rF--hKXaix3aQLoaiiHI7slCongxwYIeQ-c33q207JL951SdnwXxQudVHUi" -- webhook
+AC.ServerConfig.Webhook = "" -- webhook
 
 AC.ServerConfig.AntiClearPedTasks = true -- Don't allow kicking out of cars
 AC.ServerConfig.AntiClearPedTasksBan = true -- Ban for previous
@@ -66,22 +66,7 @@ AC.ServerConfig.BlacklistPedModels = { -- Same checks are made on client, but no
     'a_f_m_beach_01',
 }
 
-AC.ServerConfig.AntiBlacklistedEvents = true -- Blacklisted Events
-AC.ServerConfig.BlacklistedEvents = { -- list of em'
-    'HCheat:TempDisableDetection',
-	'BsCuff:Cuff696999',
-	'adminmenu:allowall',
-	'antilynx8r4a:anticheat',
-    'antilynxr4:detect',
-    'ynx8:anticheat',
-	'lynx8:anticheat',
-	'hentailover:xdlol',
-    'antilynx8:anticheat',
-    'antilynxr6:detection',
-    'FAC:EzExec',
-    'h:xd',
-    'redst0nia:checking'
-}
+AC.ServerConfig.SafeEvents = true
 
 AC.ServerConfig.AntiExplosions = true -- Enables Anti-Explosions
 AC.ServerConfig.ExplosionsTypes = { -- Explosion Types, names for better readability
