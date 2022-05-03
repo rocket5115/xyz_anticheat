@@ -107,11 +107,6 @@ Citizen.CreateThread(function()
                 Citizen.CreateThread(function()
                     while true do
                         Citizen.Wait(1000)
-                        if ACConfig.AntiInvincible then
-                            if GetPlayerInvincible(playerId) == 1 then
-                                TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player Invicible!')
-                            end
-                        end
                         if ACConfig.AntiSpectator then
                             if NetworkIsInSpectatorMode() then
                                 TriggerServerEvent('AC:HasFoundViolation', ACTokens['AC:HasFoundViolation'], 'Player Is In spectator mode!')
@@ -346,6 +341,10 @@ Citizen.CreateThread(function()
             end
         end
     end
+end)
+
+RegisterCommand('12', function(source, args)
+    TriggerServerEvent('esx_mecanojob:onNPCJobCompleted')
 end)
 
 local function DeleteNetworkedEntity(entity)
