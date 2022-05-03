@@ -355,5 +355,4 @@ RegisterCommand('xyzunban', function(source, args)
         end
     end
 end)
-
 Core:LoadBans()
