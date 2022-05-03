@@ -69,13 +69,13 @@ AC.ClientConfig.AntiInfiniteAmmo = true -- Anti infinite ammo
 
 AC.ClientConfig.BasicPlayerDetection = true -- Enables almost everything below
 
---AC.ClientConfig.AntiInvincible = true -- Unused by anticheat, found problems that need to be fixed
---AC.ClientConfig.AntiInvisible = true -- Unused by anticheat, found problems that need to be fixed
+AC.ClientConfig.AntiInvincible = true
+AC.ClientConfig.AntiInvisible = true
 --AC.ClientConfig.AntiNoclip = true -- Unused by anticheat, found problems that need to be fixed
 AC.ClientConfig.AntiSpectator = true
 AC.ClientConfig.AntiThermalVision = true
 AC.ClientConfig.AntiNightVision = true
---AC.ClientConfig.AntiRagdoll = true -- Unused by anticheat, found problems that need to be fixed
+AC.ClientConfig.AntiRagdoll = true -- Unused by anticheat, found problems that need to be fixed
 AC.ClientConfig.AntiArmour = true
 AC.ClientConfig.MaxArmour = 70 -- between 0 and 100
 AC.ClientConfig.AntiMaxHealth = true
