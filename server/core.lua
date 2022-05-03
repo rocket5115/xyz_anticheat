@@ -139,10 +139,18 @@ local BansToSave = {}
 function Core:LoadBans()
     banned = LoadResourceFile(GetCurrentResourceName(), '/json/bans.json')
     banned = json.decode(banned)
+
     if banned then
-        for k,v in pairs(banned) do
-            bannedTable[k] = v
-            BansToSave[k] = v
+        for i=1, #banned, 1 do
+            for k,v in pairs(banned) do
+                if tonumber(k) then
+                    bannedTable[tonumber(k)] = v
+                    BansToSave[tonumber(k)] = v
+                else
+                    bannedTable['ID'] = v
+                    BansToSave['ID'] = v
+                end
+            end
         end
     end
 end
@@ -355,4 +363,5 @@ RegisterCommand('xyzunban', function(source, args)
         end
     end
 end)
+
 Core:LoadBans()
