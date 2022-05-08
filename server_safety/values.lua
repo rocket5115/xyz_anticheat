@@ -1,5 +1,5 @@
 AC3 = '<xyz_anticheat<'
-AC2 = 20
+AC2 = 10
 
 Events = {}
 
