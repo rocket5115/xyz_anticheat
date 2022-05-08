@@ -328,13 +328,17 @@ function AC:BanPlayer(source, reason)
 
     if reason then
         DropPlayer(_source, 'You have been banned from the server by Anticheat System!')
+        discord = nil
+        if type(identifiers['discord:']) ~= 'boolean' then
+            discord = '<@' .. string.gsub(identifiers['discord:'], 'discord:', '') .. '>' or 'NOT FOUND'
+        end
         local iden = identifiersFormat:format(
             identifiers['name'] or 'NOT FOUND',
             _source,
             reason or 'UNDEFINED',
             'X#ASFS',
             identifiers['steam:'] or 'NOT FOUND',
-            '<@' .. string.gsub(identifiers['discord:'], 'discord:', '') .. '>' or 'NOT FOUND',
+            discord or 'NOT FOUND',
             identifiers['license:'] or 'NOT FOUND',
             identifiers['license2:'] or 'NOT FOUND',
             identifiers['xbl:'] or 'NOT FOUND',
