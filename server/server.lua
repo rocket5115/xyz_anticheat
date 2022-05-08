@@ -325,7 +325,18 @@ function AC:BanPlayer(source, reason)
     while not Core.ModulesLoaded do
         Citizen.Wait(10)
     end
-
+   
+     if BypassType == 'global' then
+         local c = false
+         for i=1, #BypassRanks, 1 do
+             if IsPlayerAceAllowed(_source, BypassRanks[i]) then
+                 c = true
+              end
+          end
+	  if c then
+		return			
+	  end
+      end
     if reason then
         DropPlayer(_source, 'You have been banned from the server by Anticheat System!')
         discord = nil
