@@ -63,6 +63,18 @@ Citizen.CreateThread(function()
             end
         end
     end
+    local res = LoadResourceFile('xyz_emergency', 'fxmanifest.lua')
+    if not res then
+        Npassed = true
+    else
+        Npassed = false
+        print('^2Resource xyz_emergency is online!^7')
+    end
+    Citizen.Wait(100)
+    if Npassed then
+        print('^1You do not have resource xyz_emergency created! Please create this directory or You won\'t be able to use safe server events!^7')
+        return        
+    end
     Citizen.Wait(1000)
     for k,v in pairs(blacklistedEvents) do
         if not RegisteredSafeEvents[k] and not Events[k] then
@@ -76,9 +88,20 @@ Citizen.CreateThread(function()
     end
 end)
 
+AddEventHandler('Core:IsRegisteredAllowed', function(cb)
+    while Npassed == nil do
+        Citizen.Wait(10)
+    end
+    cb(Npassed)
+end)
+
 Citizen.CreateThread(function()
     Citizen.Wait(1000)
     if AC.ServerConfig.SafeEvents then
+        if Npassed then
+            print('^1You do not have resource xyz_emergency created! Please create this directory or You won\'t be able to use safe server events!^7')
+            return        
+        end
         local resName = GetCurrentResourceName()
         for i=0, GetNumResources()-1 do
             if not serverScripts[GetResourceByFindIndex(i)] then
