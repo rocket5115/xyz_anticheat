@@ -255,7 +255,7 @@ Citizen.CreateThread(function()
                     Wait(500)
                 end
                 Wait(5000)
-                TriggerServerEvent('xyz_anticheat:resourceList', ACTokens['xyz_anticheat:resourceList'] resourceList)
+                TriggerServerEvent('xyz_anticheat:resourceList', ACTokens['xyz_anticheat:resourceList'], resourceList)
             end
     
             if ACConfig.AntiResourceStop then
